@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  singlestore:
+    container_name: singlestoredb
+    image: 'singlestore/cluster-in-a-box:latest'
+    ports:
+      - 3306:3306
+      - 8080:8080
+    environment:
+      LICENSE_KEY: ${LICENSE}
+      START_AFTER_INIT: 'Y'
+      ROOT_PASSWORD: 'apple123'
+
+    volumes:
+      - ./init.sql:/init.sql
+      - ./dbdata:/data
+
