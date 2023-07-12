@@ -1,0 +1,48 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="sdeveloper (generated)" id="1688537992283-1">
+        <createTable tableName="employee">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="ename" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    
+    <changeSet author="sdeveloper (generated)" id="1688537992283-2">
+        <insert tableName="employee">
+            <column name="id" valueNumeric="2"/>
+            <column name="ename" value="joe"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="id" valueNumeric="3"/>
+            <column name="ename" value="jessy"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="id" valueNumeric="1"/>
+            <column name="ename" value="john"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="sdeveloper (generated)" id="1688537992283-3">
+        <addUniqueConstraint columnNames="ID" constraintName="PRIMARY" tableName="DATABASECHANGELOGLOCK"/>
+    </changeSet>
+
+     <changeSet author="sdeveloper" id="202307052010-4">
+     <preConditions onFail="HALT">  
+         <not><and> 
+            <columnExists tableName="employee" columnName="address" />
+            <columnExists tableName="employee" columnName="mname" />
+        </and></not>
+    </preConditions>
+        <addColumn tableName="employee">
+        <column name="address" 
+            type="varchar(255)"/>  
+        <column afterColumn="id" 
+            name="mname"  
+            type="varchar(50)">  
+            <constraints nullable="false" />  
+        </column>  
+    </addColumn>  
+    </changeSet>
+</databaseChangeLog>
